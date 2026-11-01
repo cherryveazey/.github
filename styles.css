@@ -1,0 +1,176 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans",
+    Helvetica, Arial, sans-serif;
+  background: #0d1117;
+  color: #e6edf3;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.topbar {
+  border-bottom: 1px solid #21262d;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.topbar svg {
+  width: 28px;
+  height: 28px;
+  fill: #e6edf3;
+}
+
+.topbar span {
+  font-size: 18px;
+  font-weight: 600;
+  color: #f0f6fc;
+}
+
+.stage {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px;
+}
+
+.panel {
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+}
+
+.panel h1 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #f0f6fc;
+}
+
+.panel .lead {
+  font-size: 14px;
+  color: #8b949e;
+  margin-bottom: 28px;
+  min-height: 1.4em;
+}
+
+.hud-wrap {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto 20px;
+}
+
+.hud-wrap svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.track {
+  fill: none;
+  stroke: #21262d;
+  stroke-width: 6;
+}
+
+.seg {
+  fill: none;
+  stroke: #238636;
+  stroke-width: 6;
+  stroke-linecap: round;
+  transition: stroke-dasharray 0.35s ease;
+}
+
+.orbit {
+  fill: none;
+  stroke: #30363d;
+  stroke-width: 1;
+  opacity: 0.7;
+}
+
+.dot-orbit {
+  transform-origin: 100px 100px;
+  animation: spin 18s linear infinite;
+}
+
+.dot-orbit.reverse {
+  animation-direction: reverse;
+  animation-duration: 26s;
+}
+
+.orbit-dot {
+  fill: #484f58;
+}
+
+.orbit-dot.accent {
+  fill: #3fb950;
+}
+
+.hud-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.pct {
+  font-size: 28px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: #f0f6fc;
+}
+
+.pct-label {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #7d8590;
+  margin-top: 4px;
+}
+
+.status {
+  font-size: 13px;
+  color: #8b949e;
+}
+
+.status.error {
+  color: #f85149;
+}
+
+.footer {
+  border-top: 1px solid #21262d;
+  padding: 16px 24px;
+  text-align: center;
+  font-size: 12px;
+  color: #7d8590;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dot-orbit {
+    animation: none;
+  }
+  .seg {
+    transition: none;
+  }
+}
+
+body.hidden-pause .dot-orbit {
+  animation-play-state: paused;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
